@@ -79,14 +79,7 @@ int main(int argc, char *argv[])
 		listunits();
 		exit(0);
 	}
-	for (ix = 0; ix < numunits; ix++)
-	{
-		if (!strcmp(cmdname, units[ix]->cmdname))
-		{
-			unittype = units[ix];
-			break;
-		}
-	}
+	unittype = find_unit(cmdname);
 
 	if (unittype == NULL)
 		errx(1, "no such unit \"%s\"", cmdname);
