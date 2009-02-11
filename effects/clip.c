@@ -42,6 +42,7 @@ static void setfloat(synthdata_t *sd, int param, float newval)
 {
 	privdata_t *p;
 	assert(param == P_THRESHDB);
+	sd->params[param].f = newval;
 	p = sd->state;
 	p->max = pow(10.0, newval / 20.0);
 }

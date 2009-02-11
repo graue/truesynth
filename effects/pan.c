@@ -51,6 +51,7 @@ static void setfloat(synthdata_t *sd, int param, float newval)
 	float anglerad;
 
 	assert(param == P_ANGLEDEG);
+	sd->params[param].f = newval;
 
 	anglerad = newval * M_PI / 180.0;
 

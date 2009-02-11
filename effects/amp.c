@@ -42,6 +42,7 @@ static void setfloat(synthdata_t *sd, int param, float newval)
 {
 	privdata_t *p;
 	assert(param == P_AMPDB);
+	sd->params[param].f = newval;
 	p = sd->state;
 	p->multiplier = pow(10.0, newval / 20.0);
 }
