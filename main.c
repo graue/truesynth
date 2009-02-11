@@ -56,7 +56,7 @@ static void listinfo(const char *cmdname, const synthinfo_t *info)
 
 int main(int argc, char *argv[])
 {
-	int ix, jx;
+	int ix;
 	int readcnt, writecnt;
 	int bufsmps = DEFAULT_BUFSMPS;
 	const synthinfo_t *unittype = NULL;
@@ -126,17 +126,9 @@ int main(int argc, char *argv[])
 			exit(0);
 		}
 
-		for (jx = 0; jx < unittype->numparams; jx++)
-		{
-			if (!strcmp(paramname, unittype->paraminfo[jx].name))
-			{
-				pindex = jx;
-				param = &unittype->paraminfo[pindex];
-				break;
-			}
-		}
+		pindex = find_pindex(unittype, paramname);
 
-		if (param == NULL)
+		if (pindex == -1)
 		{
 			warnx("%s: ignored unknown param \"-%s\"",
 				cmdname, paramname);
@@ -150,6 +142,8 @@ int main(int argc, char *argv[])
 
 			continue;
 		}
+
+		param = &unittype->paraminfo[pindex];
 
 		if (param->paramtype == PT_BOOL)
 			unittype->setint(unit, pindex, 1);
