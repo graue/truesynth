@@ -35,7 +35,7 @@ static void setint(synthdata_t *sd, int param, int newval)
 {
 	(void)sd, (void)param, (void)newval; /* not used */
 
-	COMPLAIN("amp has no bool/int params");
+	COMPLAIN("This machine has no bool/int params");
 }
 
 static void setfloat(synthdata_t *sd, int param, float newval)
