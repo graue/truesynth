@@ -41,6 +41,11 @@ void get_rate(void);
 }
 #endif
 
+#define M_20_OVER_LN10 8.68588963806503655302257838
+#define M_LN10_OVER_20 0.115129254649702284200899573
+#define RATTODB(x) (log(x) * M_20_OVER_LN10)
+#define DBTORAT(x) exp((x) * M_LN10_OVER_20)
+
 #define CLAMP(min, n, max) ((n)<(min)?(min):((n)>(max)?(max):(n)))
 
 /*
