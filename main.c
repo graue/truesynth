@@ -2,8 +2,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
+#include <time.h>
 #include "err.h"
 #include "xm.h"
+#include "mt.h"
 #include "synth.h"
 #include "setup.h"
 #include "info.h"
@@ -61,6 +63,7 @@ int main(int argc, char *argv[])
 	float *samps;
 
 	get_rate();
+	mt_init((unsigned int)time(NULL));
 
 	if (argc < 2)
 	{
