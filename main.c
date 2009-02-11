@@ -11,6 +11,45 @@
 /* Default no. of sample frames to process at a time. */
 #define DEFAULT_BUFSMPS 1000
 
+static void listunits(void)
+{
+	int ix;
+
+	for (ix = 0; ix < numunits; ix++)
+		printf("%s\n", units[ix].cmdname);
+}
+
+static void listinfo(const char *cmdname, const synthinfo_t *info)
+{
+	int ix;
+	int paramtype;
+	const char *paramname;
+	paramval_t defval, min, max;
+
+	printf("%s is %s:\n", cmdname,
+		info->acceptsinput ? "an effect" : "a generator");
+
+	for (ix = 0; ix < info->numparams; ix++)
+	{
+		paramtype = info->paraminfo[ix].paramtype;
+		paramname = info->paraminfo[ix].name;
+		defval = info->paraminfo[ix].defval;
+		min = info->paraminfo[ix].min;
+		max = info->paraminfo[ix].max;
+
+		putchar(' ');
+		if (paramtype == PT_BOOL)
+			printf("-%s on|off [off]\n", paramname);
+		else if (paramtype == PT_INT)
+			printf("-%s %d..%d [%d]\n", paramname,
+				min.n, max.n, defval.n);
+		else if (paramtype == PT_FLOAT)
+			printf("-%s %.2f..%.2f [%.2f]\n", paramname,
+				min.f, max.f, defval.f);
+		else COMPLAIN("Bad param type");
+	}
+}
+
 int main(int argc, char *argv[])
 {
 	int ix, jx;
@@ -30,6 +69,11 @@ int main(int argc, char *argv[])
 	}
 
 	cmdname = argv[1];
+	if (!strcmp(cmdname, "help") || !strcmp(cmdname, "-help"))
+	{
+		listunits();
+		exit(0);
+	}
 	for (ix = 0; ix < numunits; ix++)
 	{
 		if (!strcmp(cmdname, units[ix].cmdname))
@@ -78,6 +122,12 @@ int main(int argc, char *argv[])
 			continue;
 		}
 
+		if (!strcmp(paramname, "help"))
+		{
+			listinfo(cmdname, unittype);
+			exit(0);
+		}
+
 		for (jx = 0; jx < unittype->numparams; jx++)
 		{
 			if (!strcmp(paramname, unittype->paraminfo[jx].name))
@@ -90,7 +140,7 @@ int main(int argc, char *argv[])
 
 		if (param == NULL)
 		{
-			warnx("%s: param \"-%s\" not found",
+			warnx("%s: ignored unknown param \"-%s\"",
 				cmdname, paramname);
 
 			/*
