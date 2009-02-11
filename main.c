@@ -61,7 +61,7 @@ int main(int argc, char *argv[])
 		paramname = &argv[ix][1];
 
 		/* special block size/buffering option for all effects */
-		if (!strcmp(paramname, "-buffer"))
+		if (!strcmp(paramname, "buffer"))
 		{
 			if (ix+1 >= argc) /* not enough args */
 			{
