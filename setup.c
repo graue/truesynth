@@ -11,6 +11,7 @@ synthdata_t *init_synth(const synthinfo_t *info)
 
 	unit = xm(sizeof *unit, 1);
 	unit->state = info->init();
+	unit->info = info;
 
 	for (ix = 0; ix < info->numparams; ix++)
 	{
