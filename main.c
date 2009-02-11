@@ -16,7 +16,7 @@ static void listunits(void)
 	int ix;
 
 	for (ix = 0; ix < numunits; ix++)
-		printf("%s\n", units[ix].cmdname);
+		printf("%s\n", units[ix]->cmdname);
 }
 
 static void listinfo(const char *cmdname, const synthinfo_t *info)
@@ -76,9 +76,9 @@ int main(int argc, char *argv[])
 	}
 	for (ix = 0; ix < numunits; ix++)
 	{
-		if (!strcmp(cmdname, units[ix].cmdname))
+		if (!strcmp(cmdname, units[ix]->cmdname))
 		{
-			unittype = &units[ix];
+			unittype = units[ix];
 			break;
 		}
 	}
