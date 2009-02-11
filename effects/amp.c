@@ -3,8 +3,8 @@
 #include <math.h>
 #include <string.h>
 #include <assert.h>
-#include "synth.h"
-#include "xm.h"
+#include "../synth.h"
+#include "../xm.h"
 
 /* amp.c: adjust a waveform's volume */
 

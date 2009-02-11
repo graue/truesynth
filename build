@@ -1,2 +1,2 @@
 #!/bin/sh
-cc -W -Wall -lm -o synth *.c
+cc -W -Wall -lm -o synth *.c effects/*.c
