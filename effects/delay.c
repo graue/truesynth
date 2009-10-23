@@ -69,6 +69,8 @@ static void setfloat(synthdata_t *sd, int param, float newval)
 		newval = CLAMP(MIN_DELAY_LEN, newval, MAX_DELAY_LEN);
 		p->len_in_smp = newval / 1000.0 * RATE;
 		p->bufrecordpos = p->bufplaypos + p->len_in_smp;
+		if (p->bufrecordpos >= 2*(int)p->buflen)
+			p->bufrecordpos -= 2*p->buflen;
 		/* XXX: hard transition/clicks. interpolate somehow! */
 	}
 	else if (param == P_FEEDBACK)
