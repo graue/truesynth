@@ -6,7 +6,8 @@ extern const synthinfo_t
 	su_clip,
 	su_delay,
 	su_pan,
-	su_power;
+	su_power,
+	su_shape;
 
 const synthinfo_t *units[] =
 {
@@ -14,7 +15,8 @@ const synthinfo_t *units[] =
 	&su_clip,
 	&su_delay,
 	&su_pan,
-	&su_power
+	&su_power,
+	&su_shape
 };
 
 const int numunits = sizeof units / sizeof units[0];
