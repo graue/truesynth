@@ -73,13 +73,15 @@ static void process(synthdata_t *sd, int nsamps, float *samps)
 {
 	privdata_t *p;
 	float exponent;
-	int positiveexponent = exponent > 0.0f;
-	int wholeexponent = exponent == floorf(exponent);
+	int positiveexponent;
+	int wholeexponent;
 	int signedexp = 0; /* XXX not implemented yet as an option, so always 0 for now */
 	int ix;
 
 	p = sd->state;
 	exponent = p->exponent;
+	positiveexponent = exponent > 0.0f;
+	wholeexponent = exponent == floorf(exponent);
 	for (ix = 0; ix < nsamps*2; ix++)
 	{
 		samps[ix] = powerify(samps[ix], positiveexponent,
