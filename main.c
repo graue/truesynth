@@ -173,8 +173,18 @@ int main(int argc, char *argv[])
 
 	samps = xm(sizeof *samps, bufsmps*2);
 
-	while ((readcnt = fread(samps, 2*sizeof samps[0], bufsmps, stdin)) > 0)
+	for (;;)
 	{
+		if (unittype->acceptsinput)
+		{
+			readcnt = fread(samps, 2*sizeof samps[0], bufsmps,
+					stdin);
+			if (readcnt <= 0)
+				break;
+		}
+		else
+			readcnt = bufsmps;
+
 		unittype->process(unit, readcnt, samps);
 
 		writecnt = fwrite(samps, 2*sizeof samps[0], readcnt, stdout);
