@@ -97,14 +97,14 @@ static void process(synthdata_t *sd, int nsamps, float *samps)
 	for (ix = 0; ix < nsamps*2; ix += 2)
 	{
 		f[0] = p->dryout*samps[ix]
-			+ p->wetout*p->buf[p->bufplaypos];
+			+ p->wetout*p->buf[2*p->bufplaypos];
 		f[1] = p->dryout*samps[ix+1]
-			+ p->wetout*p->buf[p->bufplaypos+1];
+			+ p->wetout*p->buf[2*p->bufplaypos+1];
 
-		ret[0] = samps[ix] + p->feedback*p->buf[p->bufplaypos];
-		ret[1] = samps[ix+1] + p->feedback*p->buf[p->bufplaypos+1];
-		p->buf[p->bufrecordpos] = ret[0];
-		p->buf[p->bufrecordpos+1] = ret[1];
+		ret[0] = samps[ix] + p->feedback*p->buf[2*p->bufplaypos];
+		ret[1] = samps[ix+1] + p->feedback*p->buf[2*p->bufplaypos+1];
+		p->buf[2*p->bufrecordpos] = ret[0];
+		p->buf[2*p->bufrecordpos+1] = ret[1];
 
 		samps[ix] = f[0];
 		samps[ix+1] = f[1];
