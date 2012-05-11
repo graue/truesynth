@@ -1,0 +1,19 @@
+Some audio effects and an oscillator.
+
+Can be used on the command line as a set of filters, e.g.
+  cat audiosource.f32 | synth amp -dB +6 >louder.f32
+
+Here 'amp' is the effect to use. To find out its parameters, do:
+  $ synth amp -help
+  amp is an effect:
+   -dB -120.00..120.00 [0.00]
+
+For a list of all generators and effects use 'synth -help'.
+
+The command line utilities all treat input and output as 32-bit float,
+using the sampling rate given in the environment variable RATE, or SR,
+or finally a default of 44100. When I temporarily save these files I
+like to use the '.f32' extension.
+
+Truesynth can also be used as a library: define SYNTH_NO_SHELL to
+avoid compiling the command-line interface. See synth.h for the API.
