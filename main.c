@@ -7,7 +7,7 @@
 #include <time.h>
 #include "err.h"
 #include "xm.h"
-#include "mt.h"
+#include "random.h"
 #include "synth.h"
 #include "setup.h"
 #include "info.h"
@@ -65,7 +65,7 @@ int main(int argc, char *argv[])
 	float *samps;
 
 	get_rate();
-	mt_init((unsigned int)time(NULL));
+	ts_randinit((unsigned int)time(NULL));
 
 	if (argc < 2)
 	{
