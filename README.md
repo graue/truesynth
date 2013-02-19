@@ -15,7 +15,7 @@ Here `amp` is the effect to use. To find out its parameters, do:
 This shows the effect has one parameter, `-dB`, and the minimum,
 maximum, and default values of that parameter.
 
-For a list of all generators and effects use 'synth -help'.
+For a list of all generators and effects use `synth -help`.
 
 
 ## The CLI only handles raw 32-bit floats
